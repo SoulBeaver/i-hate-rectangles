@@ -1,0 +1,38 @@
+﻿{
+    "InitialBallVelocity": {
+        "X": 1,
+        "Y": 2
+    },
+    "BallAcceleration": {
+        "X": 10,
+        "Y": 10
+    },
+    "BallRadius": 2,
+    "BallColor": {
+        "B": 0,
+        "G": 0,
+        "R": 0,
+        "A": 255
+    },
+    "BlocksPerColumn": 5,
+    "BlocksPerRow": 5,
+    "BlockSpacing": 20,
+    "BlockWidth": 100,
+    "BlockHeight": 20,
+    "BlockDistanceFromCeiling": 100,
+    "BlockColor": {
+        "B": 0,
+        "G": 0,
+        "R": 0,
+        "A": 255
+    },
+    "PaddleWidth": 100,
+    "PaddleHeight": 20,
+    "PaddleDistanceFromGutter": 100,
+    "PaddleColor": {
+        "B": 0,
+        "G": 0,
+        "R": 0,
+        "A": 255
+    }
+}

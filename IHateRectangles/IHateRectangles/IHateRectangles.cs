@@ -21,6 +21,7 @@ namespace IHateRectangles
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
         private EntityWorld _universe;
+        private Texture2D _background;
 
         public IHateRectangles()
             : base()
@@ -42,11 +43,11 @@ namespace IHateRectangles
         {
             var configuration = ReadConfigurationFile();
 
-            _universe = new EntityWorld();
             EntitySystem.BlackBoard.SetEntry("Configuration", configuration);
             EntitySystem.BlackBoard.SetEntry("GraphicsDevice", GraphicsDevice);
             EntitySystem.BlackBoard.SetEntry("SpriteBatch", _spriteBatch);
 
+            _universe = new EntityWorld();
             _universe.InitializeAll(processAttributes: true);
 
             base.Initialize();
@@ -62,6 +63,8 @@ namespace IHateRectangles
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
+
+            _background = Content.Load<Texture2D>(@"Textures\Background");
         }
 
         protected override void UnloadContent()
@@ -79,6 +82,10 @@ namespace IHateRectangles
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
+
+            _spriteBatch.Begin();
+            _spriteBatch.Draw(_background, Vector2.Zero);
+            _spriteBatch.End();
 
             base.Draw(gameTime);
         }

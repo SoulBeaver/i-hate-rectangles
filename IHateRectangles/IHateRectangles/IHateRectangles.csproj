@@ -38,10 +38,17 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Components\BackgroundComponent.cs" />
+    <Compile Include="Components\PositionComponent.cs" />
+    <Compile Include="Components\RectangleComponent.cs" />
     <Compile Include="Configuration.cs" />
     <Compile Include="IHateRectangles.cs" />
+    <Compile Include="Player.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Systems\BackgroundRenderSystem.cs" />
+    <Compile Include="Systems\PlayerInputSystem.cs" />
+    <Compile Include="Systems\RenderSystem.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="artemis">

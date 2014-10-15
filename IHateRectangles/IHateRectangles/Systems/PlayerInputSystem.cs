@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Artemis;
+﻿using Artemis;
 using Artemis.Attributes;
 using Artemis.Manager;
 using Artemis.System;
 using IHateRectangles.Components;
+using IHateRectangles.Templates;
 using Microsoft.Xna.Framework.Input;
 
 namespace IHateRectangles.Systems
@@ -17,13 +14,8 @@ namespace IHateRectangles.Systems
         private KeyboardState _currentKeyboardState;
 
         public PlayerInputSystem()
-            : base("Player")
+            : base(PaddleTemplate.Name)
         { }
-
-        public override void LoadContent()
-        {
-            base.LoadContent();
-        }
 
         public override void Process(Entity entity)
         {

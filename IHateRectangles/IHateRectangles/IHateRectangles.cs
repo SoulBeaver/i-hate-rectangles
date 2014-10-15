@@ -5,6 +5,7 @@ using System.IO;
 using Artemis;
 using Artemis.System;
 using IHateRectangles.Components;
+using IHateRectangles.Templates;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -54,9 +55,8 @@ namespace IHateRectangles
             EntitySystem.BlackBoard.SetEntry("ContentManager", Content);
 
             _universe.InitializeAll(processAttributes: true);
-
-            CreatePaddle();
-            CreateBall();
+            _universe.CreateEntityFromTemplate(PaddleTemplate.Name);
+            _universe.CreateEntityFromTemplate(BallTemplate.Name);
 
             base.Initialize();
         }
@@ -66,36 +66,6 @@ namespace IHateRectangles
             string configurationJson = File.ReadAllText("configuration.json");
 
             return JsonConvert.DeserializeObject<Configuration>(configurationJson);
-        }
-
-        private void CreatePaddle()
-        {
-            var paddle = _universe.CreateEntity();
-            paddle.Tag = "Player";
-
-            var paddleDimensions = new Rectangle
-            {
-                Width = _configuration.PaddleWidth,
-                Height = _configuration.PaddleHeight,
-                Location = new Point(0, 0)
-            };
-
-            paddle.AddComponent<TextureComponent>(new RectangleComponent(paddleDimensions));
-            paddle.AddComponent(new ColorComponent(_configuration.PaddleColor));
-            paddle.AddComponent(new PositionComponent((GraphicsDevice.Viewport.Width - _configuration.PaddleWidth) / 2,
-                                                      GraphicsDevice.Viewport.Height - _configuration.PaddleDistanceFromGutter));
-        }
-
-        private void CreateBall()
-        {
-            var ball = _universe.CreateEntity();
-
-            Console.Out.WriteLine("Ball radius:  " +_configuration.BallRadius);
-
-            ball.AddComponent<TextureComponent>(new CircleComponent(_configuration.BallRadius));
-            ball.AddComponent(new ColorComponent(_configuration.BallColor));
-            ball.AddComponent(new PositionComponent((GraphicsDevice.Viewport.Width - _configuration.PaddleWidth) / 2, 
-                                                     GraphicsDevice.Viewport.Height - _configuration.PaddleDistanceFromGutter - (int) _configuration.BallRadius * 2));
         }
 
         protected override void LoadContent()

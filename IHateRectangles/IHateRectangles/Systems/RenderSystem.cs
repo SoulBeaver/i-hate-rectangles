@@ -15,7 +15,7 @@ namespace IHateRectangles.Systems
         private SpriteBatch _spritebatch;
 
         public RenderSystem()
-            : base(Artemis.Aspect.All(typeof (RectangleComponent), typeof (PositionComponent)))
+            : base(Artemis.Aspect.All(typeof (TextureComponent)))
         { }
 
         public override void LoadContent()
@@ -25,22 +25,14 @@ namespace IHateRectangles.Systems
 
         public override void Process(Entity entity)
         {
-            System.Diagnostics.Trace.TraceInformation("Drawing the paddle at layer 1");
-
             var positionComponent = entity.GetComponent<PositionComponent>();
-            var rectangleComponent = entity.GetComponent<RectangleComponent>();
-
-            var positionedRectangle = new Rectangle
-            {
-                Width = rectangleComponent.Dimensions.Width,
-                Height = rectangleComponent.Dimensions.Height,
-                Location = new Point(positionComponent.X, positionComponent.Y)
-            };
+            var textureComponent = entity.GetComponent<TextureComponent>();
+            var colorComponent = entity.GetComponent<ColorComponent>();
 
             _spritebatch.Begin();
-            _spritebatch.Draw(rectangleComponent.Texture, 
-                              positionedRectangle,
-                              rectangleComponent.Color);
+            _spritebatch.Draw(textureComponent.Texture(), 
+                              positionComponent.Position, 
+                              colorComponent.Color);
             _spritebatch.End();
         }
     }

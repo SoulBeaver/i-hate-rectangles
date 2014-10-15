@@ -7,8 +7,17 @@ namespace IHateRectangles.Components
     {
         public Vector2 Position { get; set; }
 
-        public int X { get { return (int) Position.X; } }
-        public int Y { get { return (int) Position.Y; } }
+        public int X
+        {
+            get { return (int) Position.X; } 
+            set { Position = new Vector2(value, Position.Y); }
+        }
+
+        public int Y
+        {
+            get { return (int) Position.Y; }
+            set { Position = new Vector2(Position.X, value); }
+        }
 
         public PositionComponent()
             : this(Vector2.Zero)

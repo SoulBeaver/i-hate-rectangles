@@ -7,11 +7,11 @@
         "X": 10,
         "Y": 10
     },
-    "BallRadius": 2,
+    "BallRadius": 5,
     "BallColor": {
-        "B": 0,
-        "G": 0,
-        "R": 0,
+        "B": 50,
+        "G": 50,
+        "R": 200,
         "A": 255
     },
     "BlocksPerColumn": 5,

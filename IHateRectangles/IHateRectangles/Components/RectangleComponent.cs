@@ -1,24 +1,35 @@
-﻿using Artemis;
+﻿using System.Linq;
+using Artemis;
 using Artemis.System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace IHateRectangles.Components
 {
-    public class RectangleComponent : ComponentPoolable
+    public class RectangleComponent : TextureComponent
     {
-        public readonly Texture2D Texture;
-        public readonly Rectangle Dimensions;
-        public readonly Color Color;
+        private Texture2D _texture;
+        public Rectangle Dimensions { get; private set; }
 
-        public RectangleComponent(Rectangle dimensions, Color color)
+        public RectangleComponent(Rectangle dimensions)
+        {
+            Dimensions = dimensions;
+
+            CreateRectangleTexture();
+        }
+
+        private void CreateRectangleTexture()
         {
             var graphicsDevice = EntitySystem.BlackBoard.GetEntry<GraphicsDevice>("GraphicsDevice");
 
-            Dimensions = dimensions;
-            Color = color;
-            Texture = new Texture2D(graphicsDevice, 1, 1);
-            Texture.SetData(new[] {color});
+            _texture = new Texture2D(graphicsDevice, Dimensions.Width, Dimensions.Height);
+            var data = new Color[Dimensions.Width * Dimensions.Height].Select(c => Color.White).ToArray();
+            _texture.SetData(data);
+        }
+
+        public override Texture2D Texture()
+        {
+            return _texture;
         }
     }
 }

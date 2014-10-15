@@ -21,5 +21,6 @@ namespace IHateRectangles
         public int PaddleHeight { get; set; }
         public int PaddleDistanceFromGutter { get; set; }
         public Color PaddleColor { get; set; }
+        public int PaddleSpeed { get; set; }
     }
 }

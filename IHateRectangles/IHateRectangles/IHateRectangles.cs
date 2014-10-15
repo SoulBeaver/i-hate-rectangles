@@ -31,8 +31,8 @@ namespace IHateRectangles
             _graphics = new GraphicsDeviceManager(this)
             {
                 IsFullScreen = false,
-                PreferredBackBufferHeight = 600,
-                PreferredBackBufferWidth = 400,
+                PreferredBackBufferHeight = 1024,
+                PreferredBackBufferWidth = 600,
                 PreferredBackBufferFormat = SurfaceFormat.Color,
                 PreferMultiSampling = false,
                 PreferredDepthStencilFormat = DepthFormat.None

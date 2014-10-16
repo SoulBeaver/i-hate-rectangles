@@ -4,6 +4,7 @@ using Artemis.Attributes;
 using Artemis.Interface;
 using Artemis.System;
 using IHateRectangles.Components;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace IHateRectangles.Templates
@@ -22,6 +23,7 @@ namespace IHateRectangles.Templates
             entity.AddComponent(new ColorComponent(configuration.BallColor));
             entity.AddComponent(new PositionComponent((graphicsDevice.Viewport.Width - configuration.PaddleWidth) / 2,
                                                       graphicsDevice.Viewport.Height - configuration.PaddleDistanceFromGutter - (int)configuration.BallRadius * 2 - 1));
+            entity.AddComponent(new VelocityComponent((Vector2) args[0]));
             entity.Tag = Name;
 
             return entity;

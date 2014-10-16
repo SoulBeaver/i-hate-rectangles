@@ -4,9 +4,12 @@ namespace IHateRectangles
 {
     public struct Configuration
     {
+        public int ScreenWidth { get; set; }
+        public int ScreenHeight { get; set; }
+
         public Vector2 InitialBallVelocity { get; set; }
         public Vector2 BallAcceleration { get; set; }
-        public double BallRadius { get; set; }
+        public int BallRadius { get; set; }
         public Color BallColor { get; set; }
 
         public int BlocksPerColumn { get; set; }

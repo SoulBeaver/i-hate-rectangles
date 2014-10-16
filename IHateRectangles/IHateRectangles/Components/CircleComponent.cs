@@ -10,9 +10,9 @@ namespace IHateRectangles.Components
     public class CircleComponent : TextureComponent
     {
         private Texture2D _texture;
-        public double Radius { get; private set; }
+        public int Radius { get; private set; }
 
-        public CircleComponent(double radius)
+        public CircleComponent(int radius)
         {
             Radius = radius;
 

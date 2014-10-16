@@ -4,7 +4,6 @@ using Artemis.System;
 using Artemis.Attributes;
 using Artemis.Manager;
 using IHateRectangles.Components;
-using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace IHateRectangles.Systems

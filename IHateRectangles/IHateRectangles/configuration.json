@@ -1,7 +1,9 @@
 ﻿{
+    "ScreenWidth":  600,
+    "ScreenHeight":  1024,
     "InitialBallVelocity": {
-        "X": 1,
-        "Y": 2
+        "X": 2,
+        "Y": -2
     },
     "BallAcceleration": {
         "X": 10,

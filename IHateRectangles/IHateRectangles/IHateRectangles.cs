@@ -28,14 +28,13 @@ namespace IHateRectangles
         public IHateRectangles()
             : base()
         {
+            _configuration = ReadConfigurationFile();
+
             _graphics = new GraphicsDeviceManager(this)
             {
                 IsFullScreen = false,
-                PreferredBackBufferHeight = 1024,
-                PreferredBackBufferWidth = 600,
-                PreferredBackBufferFormat = SurfaceFormat.Color,
-                PreferMultiSampling = false,
-                PreferredDepthStencilFormat = DepthFormat.None
+                PreferredBackBufferWidth = _configuration.ScreenWidth,
+                PreferredBackBufferHeight = _configuration.ScreenHeight
             };
             IsFixedTimeStep = false;
 
@@ -45,7 +44,6 @@ namespace IHateRectangles
         protected override void Initialize()
         {
             _spritebatch = new SpriteBatch(GraphicsDevice);
-            _configuration = ReadConfigurationFile();
 
             _universe = new EntityWorld();
 
@@ -56,7 +54,7 @@ namespace IHateRectangles
 
             _universe.InitializeAll(processAttributes: true);
             _universe.CreateEntityFromTemplate(PaddleTemplate.Name);
-            _universe.CreateEntityFromTemplate(BallTemplate.Name);
+            _universe.CreateEntityFromTemplate(BallTemplate.Name, _configuration.InitialBallVelocity);
 
             base.Initialize();
         }

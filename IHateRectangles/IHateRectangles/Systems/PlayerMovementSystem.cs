@@ -12,13 +12,13 @@ using Microsoft.Xna.Framework.Input;
 namespace IHateRectangles.Systems
 {
     [ArtemisEntitySystem(GameLoopType = GameLoopType.Update)]
-    public class PlayerInputSystem : TagSystem
+    public class PlayerMovementSystem : TagSystem
     {
         private KeyboardState _currentKeyboardState;
         private GraphicsDevice _graphicsDevice;
         private int _paddleSpeed;
 
-        public PlayerInputSystem()
+        public PlayerMovementSystem()
             : base(PaddleTemplate.Name)
         {
             var configuration = BlackBoard.GetEntry<Configuration>("Configuration");

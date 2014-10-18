@@ -26,7 +26,6 @@ namespace IHateRectangles
         private Configuration _configuration;
 
         public IHateRectangles()
-            : base()
         {
             _configuration = ReadConfigurationFile();
 
@@ -39,6 +38,13 @@ namespace IHateRectangles
             IsFixedTimeStep = false;
 
             Content.RootDirectory = "Content";
+        }
+
+        private Configuration ReadConfigurationFile()
+        {
+            string configurationJson = File.ReadAllText("configuration.json");
+
+            return JsonConvert.DeserializeObject<Configuration>(configurationJson);
         }
 
         protected override void Initialize()
@@ -55,15 +61,36 @@ namespace IHateRectangles
             _universe.InitializeAll(processAttributes: true);
             _universe.CreateEntityFromTemplate(PaddleTemplate.Name);
             _universe.CreateEntityFromTemplate(BallTemplate.Name, _configuration.InitialBallVelocity);
+            CreateBlocks();
 
             base.Initialize();
         }
 
-        private Configuration ReadConfigurationFile()
+        private void CreateBlocks()
         {
-            string configurationJson = File.ReadAllText("configuration.json");
+            var blocksPerRow = _configuration.BlocksPerRow;
+            var blocksPerColumn = _configuration.BlocksPerColumn;
+            var blockSpacing = _configuration.BlockSpacing;
+            var blockColor = _configuration.BlockColor;
+            var startingRowY = _configuration.BlockDistanceFromCeiling;
+            var blockWidth = _configuration.BlockWidth;
+            var blockHeight = _configuration.BlockHeight;
 
-            return JsonConvert.DeserializeObject<Configuration>(configurationJson);
+            for (int row = 0; row < blocksPerColumn; ++row)
+            {
+                for (int column = 0; column < blocksPerRow; ++column)
+                {
+                    var blockY = startingRowY + (blockSpacing*row + row*blockHeight);
+                    var blockX = column*blockWidth + (column*blockSpacing) + blockSpacing/2;
+
+                    _universe.CreateEntityFromTemplate(BlockTemplate.Name, 
+                                                       blockWidth, 
+                                                       blockHeight, 
+                                                       blockColor, 
+                                                       blockY, 
+                                                       blockX);
+                }
+            }
         }
 
         protected override void LoadContent()

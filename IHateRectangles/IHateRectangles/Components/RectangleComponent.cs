@@ -1,5 +1,4 @@
 ﻿using System.Linq;
-using Artemis;
 using Artemis.System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;

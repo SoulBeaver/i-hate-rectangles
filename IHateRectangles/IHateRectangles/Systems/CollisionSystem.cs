@@ -10,7 +10,7 @@ using Microsoft.Xna.Framework;
 
 namespace IHateRectangles.Systems
 {
-    [ArtemisEntitySystem(GameLoopType = GameLoopType.Update)]
+    [ArtemisEntitySystem(ExecutionType = ExecutionType.Synchronous, GameLoopType = GameLoopType.Update, Layer = 1)]
     public class CollisionSystem : TagSystem
     {
         public CollisionSystem()
@@ -68,7 +68,8 @@ namespace IHateRectangles.Systems
                             break;
                     }
 
-                    // block.Delete();
+                    // "Soft" delete a block because the block.Delete method is currently bugged.
+                    block.GetComponent<PositionComponent>().Position = new Vector2(-500, -500);
                 }
             }
         }

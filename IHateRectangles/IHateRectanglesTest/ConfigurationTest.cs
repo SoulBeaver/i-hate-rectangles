@@ -15,7 +15,7 @@ namespace IHateRectanglesTest
         {
             InitialBallVelocity = new Vector2(1, 2),
             BallAcceleration = new Vector2(10, 10),
-            BallRadius = 2.0,
+            BallRadius = 2,
             BallColor = Color.Black,
 
             BlocksPerColumn = 5,

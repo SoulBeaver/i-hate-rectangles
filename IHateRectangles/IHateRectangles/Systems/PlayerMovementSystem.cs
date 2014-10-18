@@ -11,7 +11,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace IHateRectangles.Systems
 {
-    [ArtemisEntitySystem(GameLoopType = GameLoopType.Update)]
+    [ArtemisEntitySystem(ExecutionType = ExecutionType.Synchronous, GameLoopType = GameLoopType.Update)]
     public class PlayerMovementSystem : TagSystem
     {
         private KeyboardState _currentKeyboardState;

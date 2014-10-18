@@ -9,7 +9,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace IHateRectangles.Systems
 {
-    [ArtemisEntitySystem(GameLoopType = GameLoopType.Update)]
+    [ArtemisEntitySystem(ExecutionType = ExecutionType.Synchronous, GameLoopType = GameLoopType.Update)]
     public class BallMovementSystem : TagSystem
     {
         public BallMovementSystem()

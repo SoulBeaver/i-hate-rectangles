@@ -27,7 +27,7 @@ namespace IHateRectangles
         {
             if (Keyboard.GetState().GetPressedKeys().Length > 0)
                 if (OnScreenFinished != null)
-                    OnScreenFinished(new GameScreen());
+                    OnScreenFinished(new MenuScreen());
         }
 
         public void Draw()

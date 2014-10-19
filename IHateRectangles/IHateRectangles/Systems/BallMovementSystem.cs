@@ -40,11 +40,6 @@ namespace IHateRectangles.Systems
                 suggestedDestination.Y = 0;
                 velocityComponent.Velocity = new Vector2(velocityComponent.Velocity.X, -velocityComponent.Velocity.Y);
             }
-            else if (suggestedDestination.Y > graphicsDevice.Viewport.Height - circleComponent.Radius*2)
-            {
-                suggestedDestination.Y = graphicsDevice.Viewport.Height - circleComponent.Radius*2;
-                velocityComponent.Velocity = new Vector2(velocityComponent.Velocity.X, -velocityComponent.Velocity.Y);
-            }
             else
             {
                 positionComponent.Position = suggestedDestination;

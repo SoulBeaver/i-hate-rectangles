@@ -5,7 +5,7 @@ namespace IHateRectangles.Components
 {
     public class AccelerationComponent : ComponentPoolable
     {
-        public Vector2 Acceleration { get; private set; }
+        public Vector2 Acceleration { get; set; }
 
         public AccelerationComponent(int horizontalAcceleration, int verticalAcceleration)
             : this(new Vector2(horizontalAcceleration, verticalAcceleration))

@@ -53,6 +53,7 @@
     <Compile Include="Systems\BackgroundRenderSystem.cs" />
     <Compile Include="Systems\BallMovementSystem.cs" />
     <Compile Include="Systems\CollisionSystem.cs" />
+    <Compile Include="Systems\GutterSystem.cs" />
     <Compile Include="Systems\PlayerMovementSystem.cs" />
     <Compile Include="Systems\RenderSystem.cs" />
     <Compile Include="Templates\BallTemplate.cs" />

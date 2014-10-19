@@ -6,8 +6,8 @@
         "Y": -2
     },
     "BallAcceleration": {
-        "X": 10,
-        "Y": 10
+        "X": 2,
+        "Y": 2
     },
     "BallRadius": 5,
     "BallColor": {

@@ -7,6 +7,10 @@ namespace IHateRectangles.Components
     {
         public Vector2 Velocity { get; set; }
 
+        public VelocityComponent(int horizontalSpeed, int verticalSpeed)
+            : this(new Vector2(horizontalSpeed, verticalSpeed))
+        { }
+
         public VelocityComponent(Vector2 velocity)
         {
             Velocity = velocity;

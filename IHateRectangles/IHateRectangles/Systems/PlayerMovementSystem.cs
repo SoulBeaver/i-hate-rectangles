@@ -15,35 +15,33 @@ namespace IHateRectangles.Systems
     public class PlayerMovementSystem : TagSystem
     {
         private KeyboardState _currentKeyboardState;
-        private GraphicsDevice _graphicsDevice;
-        private int _paddleSpeed;
+        private Viewport _viewport;
 
         public PlayerMovementSystem()
             : base(PaddleTemplate.Name)
         {
-            var configuration = BlackBoard.GetEntry<Configuration>("Configuration");
-            _graphicsDevice = BlackBoard.GetEntry<GraphicsDevice>("GraphicsDevice");
-
-            _paddleSpeed = configuration.PaddleSpeed;
+            _viewport = BlackBoard.GetEntry<GraphicsDevice>("GraphicsDevice").Viewport;
         }
 
-        public override void Process(Entity entity)
+        public override void Process(Entity paddle)
         {
-            var positionComponent = entity.GetComponent<PositionComponent>();
+            var suggestedDestination = MovePlayer(paddle);
 
-            var suggestedDestination = MovePlayer(positionComponent);
-            if (IsValidDestination(positionComponent.Position, suggestedDestination, entity.GetComponent<TextureComponent>() as RectangleComponent))
+            var positionComponent = paddle.GetComponent<PositionComponent>();
+            if (IsValidDestination(positionComponent.Position, suggestedDestination, paddle.GetComponent<TextureComponent>() as RectangleComponent))
                 positionComponent.Position = suggestedDestination;
         }
 
-        private Vector2 MovePlayer(PositionComponent positionComponent)
+        private Vector2 MovePlayer(Entity paddle)
         {
+            var positionComponent = paddle.GetComponent<PositionComponent>();
+            var paddleSpeed = paddle.GetComponent<VelocityComponent>().Velocity;
             _currentKeyboardState = Keyboard.GetState();
 
             if (_currentKeyboardState.IsKeyDown(Keys.A) || _currentKeyboardState.IsKeyDown(Keys.Left))
-                return new Vector2(positionComponent.X - _paddleSpeed, positionComponent.Y);
+                return new Vector2(positionComponent.X - paddleSpeed.X, positionComponent.Y);
             else if (_currentKeyboardState.IsKeyDown(Keys.D) || _currentKeyboardState.IsKeyDown(Keys.Right))
-                return new Vector2(positionComponent.X + _paddleSpeed, positionComponent.Y);
+                return new Vector2(positionComponent.X + paddleSpeed.X, positionComponent.Y);
             else
                 return positionComponent.Position;
         }
@@ -51,7 +49,7 @@ namespace IHateRectangles.Systems
         private bool IsValidDestination(Vector2 currentPosition, Vector2 suggestedDestination, RectangleComponent rectangleComponent)
         {
             return suggestedDestination == currentPosition ||
-                   (suggestedDestination.X >= 0 && suggestedDestination.X <= _graphicsDevice.Viewport.Width - rectangleComponent.Dimensions.Width);
+                   (suggestedDestination.X >= 0 && suggestedDestination.X <= _viewport.Width - rectangleComponent.Dimensions.Width);
         }
     }
 }

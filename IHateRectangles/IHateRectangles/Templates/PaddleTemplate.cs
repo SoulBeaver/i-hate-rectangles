@@ -29,6 +29,7 @@ namespace IHateRectangles.Templates
             entity.AddComponent(new ColorComponent(configuration.PaddleColor));
             entity.AddComponent(new PositionComponent((graphicsDevice.Viewport.Width - configuration.PaddleWidth) / 2,
                                                       graphicsDevice.Viewport.Height - configuration.PaddleDistanceFromGutter));
+            entity.AddComponent(new VelocityComponent(configuration.PaddleSpeed, 0));
             entity.Tag = Name;
 
             return entity;

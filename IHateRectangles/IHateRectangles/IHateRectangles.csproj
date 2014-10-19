@@ -38,6 +38,7 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Components\AccelerationComponent.cs" />
     <Compile Include="Components\BackgroundComponent.cs" />
     <Compile Include="Components\CircleComponent.cs" />
     <Compile Include="Components\ColorComponent.cs" />

@@ -27,7 +27,7 @@ namespace IHateRectangles.Systems
         {
             var position = ball.GetComponent<PositionComponent>().Position;
             var texture = ball.GetComponent<TextureComponent>().Texture();
-            var velocity = ball.GetComponent<VelocityComponent>().Velocity;
+            
             var ballRectangle = new Rectangle
             {
                 Width = texture.Width,
@@ -52,18 +52,28 @@ namespace IHateRectangles.Systems
                 var collisionDetector = CalculateMinkowskiSum(ballRectangle, blockRectangle);
                 if (collisionDetector.IsColliding())
                 {
+                    var velocityComponent = ball.GetComponent<VelocityComponent>();
+                    var velocity = ball.GetComponent<VelocityComponent>().Velocity;
+                    var accelerationComponent = ball.GetComponent<AccelerationComponent>();
+
+                    velocityComponent.Velocity = velocity.X < 0 ? new Vector2(velocity.X - accelerationComponent.Acceleration.X, velocity.Y) 
+                                                                : new Vector2(velocity.X + accelerationComponent.Acceleration.X, velocity.Y);
+                    velocityComponent.Velocity = velocity.Y < 0 ? new Vector2(velocity.X, velocity.Y - accelerationComponent.Acceleration.Y)
+                                                                : new Vector2(velocity.X, velocity.Y + accelerationComponent.Acceleration.Y);
+                    velocity = velocityComponent.Velocity;
+
                     var side = collisionDetector.CollidingSide();
                     switch (side)
                     {
                         case Side.Left:
                         case Side.Right:
-                            ball.GetComponent<VelocityComponent>().Velocity = new Vector2(-velocity.X, velocity.Y);
+                            velocityComponent.Velocity = new Vector2(-velocity.X, velocity.Y);
                             ball.Refresh();
                             break;
 
                         case Side.Bottom:
                         case Side.Top:
-                            ball.GetComponent<VelocityComponent>().Velocity = new Vector2(velocity.X, -velocity.Y);
+                            velocityComponent.Velocity = new Vector2(velocity.X, -velocity.Y);
                             ball.Refresh();
                             break;
                     }

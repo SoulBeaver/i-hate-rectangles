@@ -24,7 +24,7 @@ namespace IHateRectangles.Templates
             entity.AddComponent(new PositionComponent((graphicsDevice.Viewport.Width - configuration.PaddleWidth) / 2,
                                                       graphicsDevice.Viewport.Height - configuration.PaddleDistanceFromGutter - (int)configuration.BallRadius * 2 - 1));
             entity.AddComponent(new VelocityComponent((Vector2) args[0]));
-            entity.AddComponent(new AccelerationComponent((int) configuration.BallAcceleration.X, (int) configuration.BallAcceleration.Y));
+            entity.AddComponent(new AccelerationComponent(configuration.BallAcceleration.X, configuration.BallAcceleration.Y));
             entity.Tag = Name;
 
             return entity;

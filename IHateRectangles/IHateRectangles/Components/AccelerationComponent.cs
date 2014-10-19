@@ -7,7 +7,7 @@ namespace IHateRectangles.Components
     {
         public Vector2 Acceleration { get; set; }
 
-        public AccelerationComponent(int horizontalAcceleration, int verticalAcceleration)
+        public AccelerationComponent(float horizontalAcceleration, float verticalAcceleration)
             : this(new Vector2(horizontalAcceleration, verticalAcceleration))
         { }
 

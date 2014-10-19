@@ -40,7 +40,7 @@ namespace IHateRectangles
                                     new Vector2(viewport.Width / 2 - 100, viewport.Height / 2 - 200),
                                     Color.White);
             _spriteBatch.DrawString(_menuFont,
-                                    "Press any key to return to the Menu or Escape to quit.",
+                                    "Escape to quit, otherwise return",
                                     new Vector2(viewport.Width / 2 - 250, viewport.Height / 2 - 100),
                                     Color.White);
             _spriteBatch.End();

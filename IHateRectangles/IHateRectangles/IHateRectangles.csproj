@@ -47,9 +47,14 @@
     <Compile Include="Components\TextureComponent.cs" />
     <Compile Include="Components\VelocityComponent.cs" />
     <Compile Include="Configuration.cs" />
+    <Compile Include="Screens\GameScreen.cs" />
     <Compile Include="IHateRectangles.cs" />
+    <Compile Include="Screens\LoseScreen.cs" />
+    <Compile Include="Screens\MenuScreen.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Screens\Screen.cs" />
+    <Compile Include="Screens\ScreenManager.cs" />
     <Compile Include="Systems\BackgroundRenderSystem.cs" />
     <Compile Include="Systems\BallMovementSystem.cs" />
     <Compile Include="Systems\CollisionSystem.cs" />
@@ -59,6 +64,7 @@
     <Compile Include="Templates\BallTemplate.cs" />
     <Compile Include="Templates\BlockTemplate.cs" />
     <Compile Include="Templates\PaddleTemplate.cs" />
+    <Compile Include="Screens\WinScreen.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="artemis">

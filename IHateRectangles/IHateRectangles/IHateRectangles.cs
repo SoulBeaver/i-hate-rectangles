@@ -24,6 +24,7 @@ namespace IHateRectangles
         private SpriteBatch _spritebatch;
         private EntityWorld _universe;
         private Configuration _configuration;
+        private ScreenManager _screenManager;
 
         public IHateRectangles()
         {
@@ -51,59 +52,20 @@ namespace IHateRectangles
         {
             _spritebatch = new SpriteBatch(GraphicsDevice);
 
-            _universe = new EntityWorld();
-
             EntitySystem.BlackBoard.SetEntry("Configuration", _configuration);
             EntitySystem.BlackBoard.SetEntry("GraphicsDevice", GraphicsDevice);
             EntitySystem.BlackBoard.SetEntry("SpriteBatch", _spritebatch);
             EntitySystem.BlackBoard.SetEntry("ContentManager", Content);
 
-            _universe.InitializeAll(processAttributes: true);
-            _universe.CreateEntityFromTemplate(PaddleTemplate.Name);
-            _universe.CreateEntityFromTemplate(BallTemplate.Name, _configuration.InitialBallVelocity);
-            CreateBlocks();
+            _screenManager = new ScreenManager();
+            _screenManager.SetScreen(new MenuScreen());
 
             base.Initialize();
-        }
-
-        private void CreateBlocks()
-        {
-            var blocksPerRow = _configuration.BlocksPerRow;
-            var blocksPerColumn = _configuration.BlocksPerColumn;
-            var blockSpacing = _configuration.BlockSpacing;
-            var blockColor = _configuration.BlockColor;
-            var startingRowY = _configuration.BlockDistanceFromCeiling;
-            var blockWidth = _configuration.BlockWidth;
-            var blockHeight = _configuration.BlockHeight;
-
-            for (int row = 0; row < blocksPerColumn; ++row)
-            {
-                for (int column = 0; column < blocksPerRow; ++column)
-                {
-                    var blockY = startingRowY + (blockSpacing*row + row*blockHeight);
-                    var blockX = column*blockWidth + (column*blockSpacing) + blockSpacing/2;
-
-                    _universe.CreateEntityFromTemplate(BlockTemplate.Name, 
-                                                       blockWidth, 
-                                                       blockHeight, 
-                                                       blockColor, 
-                                                       blockY, 
-                                                       blockX);
-                }
-            }
         }
 
         protected override void LoadContent()
         {
             _spritebatch = new SpriteBatch(GraphicsDevice);
-
-            CreateBackground();
-        }
-
-        private void CreateBackground()
-        {
-            var background = _universe.CreateEntity();
-            background.AddComponent(new BackgroundComponent(Content.Load<Texture2D>(@"Textures\Background")));
         }
 
         protected override void UnloadContent()
@@ -114,7 +76,7 @@ namespace IHateRectangles
             if (Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            _universe.Update();
+            _screenManager.Update();
 
             base.Update(gameTime);
         }
@@ -123,9 +85,7 @@ namespace IHateRectangles
         {
             GraphicsDevice.Clear(Color.Black);
 
-            _spritebatch.Begin();
-            _universe.Draw();
-            _spritebatch.End();
+            _screenManager.Draw();
         }
     }
 }
